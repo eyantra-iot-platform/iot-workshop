@@ -15,14 +15,14 @@ manage your devices. For that we have organizational units provided in the platf
 After you create a thing, you can download the information for the devices like certificates, thingID, etc. and connect them.
 
 ### As you can see, connecting devices actually is a two step process. For that reason we have grouped resources into two folders:
-1. [**Using e-Yantra IoT Platform**](./iot-platform/using-iot-platform)
+1. [**Using e-Yantra IoT Platform**](./using-iot-platform)
     
     Resources and necessary readings to create organizational units and provisioning things/devices that you wish to use.
    This part is essentially the same for any device you use be it Rpi, Arduino, ESP or your personal computer using whichever 
    language runtime (like Python, NodeJS, C).
    
-2. [**Connecting devices to e-Yantra IoT Platform**](./iot-platform/connecting-devices-to-platform)
+2. [**Connecting devices to e-Yantra IoT Platform**](./iconnecting-devices-to-platform)
 
     Code samples and necessary readings to connect devices to IoT Platform using information obtained from previous steps.
     
-In e-Yantra IoT workshops, we give kits to the participants over which they perform these hands-on exercises. In the end, they also a sample application. You can find them in the [**projects**](./iot-platform/projects) folder.
+In e-Yantra IoT workshops, we give kits to the participants over which they perform these hands-on exercises. In the end, they also a sample application. You can find them in the [**projects**](./projects) folder.
