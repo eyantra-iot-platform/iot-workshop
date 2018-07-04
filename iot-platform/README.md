@@ -21,7 +21,7 @@ After you create a thing, you can download the information for the devices like 
    This part is essentially the same for any device you use be it Rpi, Arduino, ESP or your personal computer using whichever 
    language runtime (like Python, NodeJS, C).
    
-2. [**Connecting devices to e-Yantra IoT Platform**](./iconnecting-devices-to-platform)
+2. [**Connecting devices to e-Yantra IoT Platform**](./connecting-devices-to-platform)
 
     Code samples and necessary readings to connect devices to IoT Platform using information obtained from previous steps.
     
