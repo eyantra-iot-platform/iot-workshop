@@ -4,7 +4,7 @@
 This is a project to send arbitrary data to AWS IoT. It publishes data to thing shadow service in AWS IoT.
 
 ## Steps:
- 1. Login to IoT dashboard available in following [link](http://ec2-13-229-107-106.ap-southeast-1.compute.amazonaws.com/login) with the provided user id and password
+ 1. Login to IoT dashboard available in following [link](http://iot.e-yantra.com) with the provided user id and password
  2. Create a thing in the dashboard 
  3. Create devices under thing as:
      * Temperature, double
