@@ -33,7 +33,7 @@ print("Connected: ", connected)
 
 
 # Dictionaries and messages for publishing
-publish_dict = {'state': {'reported': {'device26.69': 29, 'device26.70': 12, 'device27.71': 'Hello World!'}}}
+publish_dict = {'state': {'reported': {'device26.69': 29, 'device26.70': 12.0, 'device27.71': 'Hello World!'}}}
 publish_message = json.dumps(publish_dict)
 print("Message to publish: ", publish_message)
 
