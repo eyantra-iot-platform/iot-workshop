@@ -3,23 +3,25 @@ import time
 import json
 import ast
 import RPi.GPIO as GPIO
-import servo_control as ser
+import servo_control as servo
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
 
 # Details about thing
+# TODO: Change settings
 THING_ID = "thing22"
 CLIENT_ID = "MyRpi"
 CERTIFICATE_PATH = "./certificates"
 ENDPOINT = "akbmorjah98q5.iot.ap-southeast-1.amazonaws.com"
 
-
 # LED PINs
+# TODO: Change pins [if required]
 LED_PIN_1 = 22
 LED_PIN_2 = 17
 LED_PIN_3 = 27
 
 # Servo PINs
+# TODO: Change settings [if required]
 SERVO_PIN_1 = 23
 SERVO_PIN_2 = 24
 
@@ -39,8 +41,8 @@ ROOT_CA = CERTIFICATE_PATH + "/rootCA.pem"
 PRIVATE_KEY = CERTIFICATE_PATH + "/private.key.pem"
 CERTIFICATE_CRT = CERTIFICATE_PATH + "/certificate.crt.pem"
 
-servo1 = ser.Servo(SERVO_PIN_1)
-servo2 = ser.Servo(SERVO_PIN_2)
+servo1 = servo.Servo(SERVO_PIN_1)
+servo2 = servo.Servo(SERVO_PIN_2)
 
 
 
@@ -66,10 +68,13 @@ def get_init_mqtt_client():
 def publish_sensor_data(interval, mqtt_client, servo1, servo2):	
 	while True:
 		# Dictionaries and messages for publishing
-		publish_dict = {'state': {'reported': {'device24.65': get_sensor_values(), 
+		
+		# TODO: Change the dictionary keys to keys of the device shadow JSON 
+		publish_dict = {'state': {'reported': {'device24.65': get_led_values(), 
 			'device24.66': servo1.get_value(),
 			'device24.68': servo2.get_value()
 		}}}
+
 		publish_message = json.dumps(publish_dict)
 		print "Message to publish:-", publish_message
 
@@ -87,6 +92,8 @@ def update_thing_state(client, userdata, message):
 	message_dict = ast.literal_eval(message.payload)
 	
 	state = message_dict['state']
+	# TODO: Change the dictionary keys to keys of the device shadow JSON
+	# Change to your LED device 
 	if 'device24.65' in state:
 		led = message_dict['state']['device24.65']
 		if led == 0:
@@ -106,27 +113,21 @@ def update_thing_state(client, userdata, message):
 			GPIO.output(LED_PIN_2, False)
 			GPIO.output(LED_PIN_3, False)
 
+	# TODO: Change the dictionary keys to keys of the device shadow JSON
+	# Change it to your servo1
 	if 'device24.66' in state:
 		print "Moving servo ..."
 		angle = message_dict['state']['device24.66']
 		servo1.set_value(angle)
 
+	# TODO: Change the dictionary keys to keys of the device shadow JSON
+	# Change it to your servo1
 	if 'device24.68' in state:
 		print "Moving servo ...."
 		angle2 = message_dict['state']['device24.68']
 		servo2.set_value(angle2)
 	
-	# led = GPIO.input(LED_PIN_1)
-	# publish_dict = {'state': {'reported': {'device24.65': led, 'device24.66': 12}}}
-	# publish_message = json.dumps(publish_dict)
-	# print "Message to publish:-", publish_message
 
-	# # Update device shadow
-	# published = mqtt_client.publish(UPDATE_TOPIC, publish_message, 0)
-
-
-def get_sensor_values():
-	return get_led_values()
 
 def get_led_values():
 	if GPIO.input(LED_PIN_1):

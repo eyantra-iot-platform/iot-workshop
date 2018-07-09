@@ -2,14 +2,14 @@ import json
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
 # Thing information
-ThingID = "25"
-ClientID = "myClientID" 
-IoTEndpoint = "akbmorjah98q5.iot.ap-southeast-1.amazonaws.com"
+THING_ID = "25"
+CLIENT_ID = "myClientID" 
+ENDPOINT = "akbmorjah98q5.iot.ap-southeast-1.amazonaws.com"
 CERTIFICATE_PATH = "./certificates"
 
 # Change to your topics here
-UPDATE_TOPIC = "$aws/things/thing" + ThingID + "/shadow/update"
-DELTA_TOPIC = "$aws/things/thing" + ThingID + "/shadow/update/delta"
+UPDATE_TOPIC = "$aws/things/thing" + THING_ID + "/shadow/update"
+DELTA_TOPIC = "$aws/things/thing" + THING_ID + "/shadow/update/delta"
 
 ROOT_CA = CERTIFICATE_PATH + "/rootCA.pem"
 PRIVATE_KEY = CERTIFICATE_PATH + "/private.key.pem"
@@ -17,8 +17,8 @@ CERTIFICATE_CRT = CERTIFICATE_PATH + "/certificate.crt.pem"
 
 
 # Configuration for AWS IoT
-myMQTTClient = AWSIoTMQTTClient(ClientID)
-myMQTTClient.configureEndpoint(IoTEndpoint, 8883)
+myMQTTClient = AWSIoTMQTTClient(CLIENT_ID)
+myMQTTClient.configureEndpoint(ENDPOINT, 8883)
 myMQTTClient.configureCredentials(ROOT_CA, PRIVATE_KEY, CERTIFICATE_CRT)
 # myMQTTClient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
 # myMQTTClient.configureDrainingFrequency(2)  # Draining: 2 Hz
