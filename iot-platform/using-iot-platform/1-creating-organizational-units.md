@@ -33,9 +33,9 @@ Lets get started:
 1. Login to [**e-Yantra IoT Platform**](http://iot.e-yantra.com) using the user ID and password provided to you (if you have set that up [**locally**](http://github.com/E-yantra/iot-platform), you can visit localhost on default port 8002).
 2. Once you login you will see the Units that have been assigned to you like below.
 !["Main page"](./assets/main-page.png "Main page")
-3. You can create a unit inside this unit (if you have all permissions).
-4. Go ahead and click on "Create Subunit". You will see the below dialog.
-!["Unit Modal 1"](./assets/unit-modal-1.png "Unit Modal 1")
-5. Fill in the details as shown below.
-!["Unit Modal 2"](./assets/unit-modal-2.png "Unit Modal 2")
-6. 
+3. Click on the **manage** button.
+4. You can create a unit inside this unit (if you have all permissions).
+!["Main unit"](./assets/main-unit.png "Main unit")
+5. Go ahead and click on **Create Subunit**. You will see a dialog box.
+!["Create subunit"](./assets/create-subunit.png "Create subunit")
+6. Fill in the details as shown below. 
