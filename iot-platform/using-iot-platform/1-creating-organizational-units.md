@@ -60,3 +60,8 @@ Lets get started:
     2. *rootCA.pem* (you should download this seperately).
 15. You'll find similar information under your **generate client tab**.
 !["Generate client"](./assets/generate-client.png "Generate client")
+
+
+*That is all there is to it. This was the first tutorial in this series on **creating Organizational unit**. You should use these building blocks to structure your IoT project, to group **things** in a way that makes most sense.*
+
+Next you should check out other individual tutorials on features available in IoT Platform or the [main pdf file](./iot-dashboard.pdf "IoT Dashboard Pdf").
