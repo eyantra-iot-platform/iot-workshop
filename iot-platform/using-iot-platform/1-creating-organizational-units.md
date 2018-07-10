@@ -62,6 +62,6 @@ Lets get started:
 !["Generate client"](./assets/generate-client.png "Generate client")
 
 
-*That is all there is to it. This was the first tutorial in this series on **creating Organizational unit**. You should use these building blocks to structure your IoT project, to group **things** in a way that makes most sense.*
+*That is all there is to it. This was the first tutorial in the series on **using IoT platform**. You should use these building blocks to structure your IoT project, to group **things** in a way that makes most sense.*
 
-Next you should check out other individual tutorials on features available in IoT Platform or the [main pdf file](./iot-dashboard.pdf "IoT Dashboard Pdf").
+Next you should check out other individual tutorials on features available in IoT Platform or the [**complete guide**](./iot-dashboard.pdf "IoT Dashboard Pdf").
