@@ -1,4 +1,4 @@
-## Using IoT Platform
+## Using e-Yantra IoT Platform
 
 In this tutorial you will learn to create organizational units in e-Yantra IoT Platform.
 
@@ -34,8 +34,29 @@ Lets get started:
 2. Once you login you will see the Units that have been assigned to you like below.
 !["Main page"](./assets/main-page.png "Main page")
 3. Click on the **manage** button.
-4. You can create a unit inside this unit (if you have all permissions).
+4. You can create a unit inside this unit (if you have **ALL** permissions).
 !["Main unit"](./assets/main-unit.png "Main unit")
-5. Go ahead and click on **Create Subunit**. You will see a dialog box.
+5. Go ahead and click on **Create Subunit**. You will see a dialog box. Fill in the details as shown below and click on save.
 !["Create subunit"](./assets/create-subunit.png "Create subunit")
-6. Fill in the details as shown below. 
+6. If you successfully created your unit, you will see **IoT Lab** in the **Subunits section**.
+!["Subunit created"](./assets/subunit-created.png "Subunit created")
+7. Click to open it and you will be inside the unit.
+!["IoT Lab Unit"](./assets/iot-lab-unit.png "IoT Lab Unit")
+8. Next find the **Create Thing** button on top and fill in the details like below.
+!["Create thing"](./assets/create-thing.png "Create thing")
+!["Thing modal"](./assets/thing-modal.png "Thing modal")
+9. Once done, click on save. If it was successfully created you can find the **Rpi** in **Things section**.
+!["Raspberry pi thing"](./assets/rpi-thing.png "Rpi Thing")
+10. Open it and you'll see similar to below screen.
+!["Rpi thing page"](./assets/rpi-thing-page.png "Rpi thing page")
+11. Next click the **Add Device** button on top and fill the details like below. Remember you have to create two devices, LED and Rpi. Click save after filling the data about devices.
+!["Create LED device"](./assets/create-led-device.png "Create LED device")
+!["Create DHT device"](./assets/create-dht-device.png "Create DHT device")
+12. You should find the **saved devices** like below.
+!["Saved devices"](./assets/saved-devices.png "Saved devices")
+13. You can now **download certificates** and see the **information about the thing in generate client tab** which you can use to send data. 
+14. Go ahead and try downloading device certificates either as **zip** or **popups**. You will find 3 files:
+    1. *private.key.pem, public.key.pem, certificate.crt.pem* (all three included in zip).
+    2. *rootCA.pem* (you should download this seperately).
+15. You'll find similar information under your **generate client tab**.
+!["Generate client"](./assets/generate-client.png "Generate client")
