@@ -4,8 +4,8 @@ Crons are commands to be executed at a specified time. In IoT Platform, we can s
 
 Prerequisites
 -----
-1. Creating organizational units with actuators in IoT Platform.
-2. Connecting a thing (micro-controllers, connected devices) to IoT Platform and make it trigger actions (like LED on/off, etc).
+1. Creating [organizational units](./1-creating-organizational-units.md) with actuators in IoT Platform.
+2. [Connecting a thing](../connecting-devices-to-platform/python/1-connecting-devices-to-platform-python.md) (micro-controllers, connected devices) to IoT Platform and make it trigger actions (like LED on/off, etc).
 
 Steps
 -----
