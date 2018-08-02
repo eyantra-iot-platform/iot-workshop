@@ -16,9 +16,9 @@ ENDPOINT = "akbmorjah98q5.iot.ap-southeast-1.amazonaws.com"
 
 # LED PINs
 # TODO: Change pins [if required]
-LED_PIN_1 = 22
-LED_PIN_2 = 17
-LED_PIN_3 = 27
+LED_PIN_1 = 17 # 11 R
+LED_PIN_2 = 27 # 13 G
+LED_PIN_3 = 22 # 15 B
 
 # Servo PINs
 # TODO: Change settings [if required]
