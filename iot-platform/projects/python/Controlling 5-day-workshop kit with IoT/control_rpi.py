@@ -25,6 +25,14 @@ LED_PIN_3 = 27
 SERVO_PIN_1 = 23
 SERVO_PIN_2 = 24
 
+# Device ids
+LED_ID = "device81.241"
+SERVO_PIN_1_ID = "device78.238"
+SERVO_PIN_2_ID = "device79.239"
+
+TEMP_ID = "device82.242"
+HUMID_ID = "device82.243"
+
 # Initialize GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED_PIN_1, GPIO.OUT)
@@ -70,9 +78,9 @@ def publish_sensor_data(interval, mqtt_client, servo1, servo2):
 		# Dictionaries and messages for publishing
 		
 		# TODO: Change the dictionary keys to keys of the device shadow JSON 
-		publish_dict = {'state': {'reported': {'device24.65': get_led_values(), 
-			'device24.66': servo1.get_value(),
-			'device24.68': servo2.get_value()
+		publish_dict = {'state': {'reported': {LED_ID: get_led_values(), 
+			SERVO_PIN_1_ID: servo1.get_value(),
+			SERVO_PIN_2_ID: servo2.get_value()
 		}}}
 
 		publish_message = json.dumps(publish_dict)
@@ -94,8 +102,8 @@ def update_thing_state(client, userdata, message):
 	state = message_dict['state']
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
 	# Change to your LED device 
-	if 'device24.65' in state:
-		led = message_dict['state']['device24.65']
+	if LED_ID in state:
+		led = message_dict['state'][LED_ID]
 		if led == "RED":
 			GPIO.output(LED_PIN_1, True)
 			GPIO.output(LED_PIN_2, False)
@@ -115,16 +123,16 @@ def update_thing_state(client, userdata, message):
 
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
 	# Change it to your servo1
-	if 'device24.66' in state:
+	if SERVO_PIN_1_ID in state:
 		print "Moving servo ..."
-		angle = message_dict['state']['device24.66']
+		angle = message_dict['state'][SERVO_PIN_1_ID]
 		servo1.set_value(angle)
 
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
 	# Change it to your servo1
-	if 'device24.68' in state:
+	if SERVO_PIN_2_ID in state:
 		print "Moving servo ...."
-		angle2 = message_dict['state']['device24.68']
+		angle2 = message_dict['state'][SERVO_PIN_2_ID]
 		servo2.set_value(angle2)
 	
 
