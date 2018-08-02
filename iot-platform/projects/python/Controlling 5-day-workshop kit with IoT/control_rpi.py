@@ -4,6 +4,7 @@ import json
 import ast
 import RPi.GPIO as GPIO
 import servo_control as servo
+import Adafruit_DHT
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
 
@@ -16,14 +17,17 @@ ENDPOINT = "akbmorjah98q5.iot.ap-southeast-1.amazonaws.com"
 
 # LED PINs
 # TODO: Change pins [if required]
-LED_PIN_1 = 17 # 11 R
-LED_PIN_2 = 27 # 13 G
-LED_PIN_3 = 22 # 15 B
+LED_PIN_1 = 17 # 11 R but B
+LED_PIN_2 = 27 # 13 G but G
+LED_PIN_3 = 22 # 15 B but R
 
 # Servo PINs
 # TODO: Change settings [if required]
 SERVO_PIN_1 = 23
 SERVO_PIN_2 = 24
+
+# Temperature and humidity sensor
+DHT_PIN = 39
 
 # Device ids
 LED_ID = "device81.241"
@@ -32,6 +36,7 @@ SERVO_PIN_2_ID = "device79.239"
 
 TEMP_ID = "device82.242"
 HUMID_ID = "device82.243"
+
 
 # Initialize GPIO
 GPIO.setmode(GPIO.BCM)
@@ -51,6 +56,7 @@ CERTIFICATE_CRT = CERTIFICATE_PATH + "/certificate.crt.pem"
 
 servo1 = servo.Servo(SERVO_PIN_1)
 servo2 = servo.Servo(SERVO_PIN_2)
+sensor = Adafruit_DHT.DHT11
 
 
 
@@ -76,11 +82,13 @@ def get_init_mqtt_client():
 def publish_sensor_data(interval, mqtt_client, servo1, servo2):	
 	while True:
 		# Dictionaries and messages for publishing
-		
+		humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 		# TODO: Change the dictionary keys to keys of the device shadow JSON 
 		publish_dict = {'state': {'reported': {LED_ID: get_led_values(), 
 			SERVO_PIN_1_ID: servo1.get_value(),
-			SERVO_PIN_2_ID: servo2.get_value()
+			SERVO_PIN_2_ID: servo2.get_value(),
+			TEMP_ID: temperature,
+			HUMID_ID: humidity
 		}}}
 
 		publish_message = json.dumps(publish_dict)
@@ -104,7 +112,7 @@ def update_thing_state(client, userdata, message):
 	# Change to your LED device 
 	if LED_ID in state:
 		led = message_dict['state'][LED_ID]
-		if led == "RED":
+		if led == "BLUE":
 			GPIO.output(LED_PIN_1, True)
 			GPIO.output(LED_PIN_2, False)
 			GPIO.output(LED_PIN_3, False)
@@ -112,7 +120,7 @@ def update_thing_state(client, userdata, message):
 			GPIO.output(LED_PIN_1, False)
 			GPIO.output(LED_PIN_2, True)
 			GPIO.output(LED_PIN_3, False)
-		elif led == "BLUE":
+		elif led == "RED":
 			GPIO.output(LED_PIN_1, False)
 			GPIO.output(LED_PIN_2, False)
 			GPIO.output(LED_PIN_3, True)
@@ -139,11 +147,11 @@ def update_thing_state(client, userdata, message):
 
 def get_led_values():
 	if GPIO.input(LED_PIN_1):
-		led = "RED"
+		led = "BLUE"
 	elif GPIO.input(LED_PIN_2):
 		led = "GREEN"
 	elif GPIO.input(LED_PIN_3):
-		led = "BLUE"
+		led = "RED"
 	else:
 		led = "OFF"
 	return led 
