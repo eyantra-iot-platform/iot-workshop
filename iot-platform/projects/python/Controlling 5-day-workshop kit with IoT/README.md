@@ -10,19 +10,22 @@ The Kit
 Lets get started
 -----
 1. Download or clone this repo and change directory to the `iot-workshop/iot-platform/projects/python/Controlling 5-day-workshop kit with IoT` folder (You can either do it on your Rpi directly or you can move the project files after modifying them on your computer).
-2. Next go ahead and create a thing for this Rpi in IoT Platform. You have to create 3 devices:
+2. Next go ahead and create a thing for this Rpi in IoT Platform. You have to create 4 devices:
     1. ServoH: Should have one **integer** device attribute which **needs to be an actuator.**
     2. ServoV: Should have one **integer** device attribute which **needs to be an actuator.**
-    3. LED: Should have one **integer** device attribute which **needs to be an actuator too.**
+    3. LED: Should have one **string** device attribute which **needs to be an actuator too.**
+    4. DHT: It should have two device attributes.
+        1. Temperature: Should have one **double** device attribute which is **NOT an actuator.**
+        2. Humidity: Should have one **double** device attribute which is **NOT an actuator.**
     [Check this to know more about how you can do it](../../using-iot-platform/1-creating-organizational-units.md).
 
 3. Once that is done and your thing is created, you should download certificates for it and put them in certificates folder under projects.
 4. Next open [*control_rpi.py*](./control_rpi.py) file using a text editor and change below settings to what you can find on "generate client" tab.
     1. Thing settings 
     ![Thing settings](./assets/thing-settings.png "Thing settings")
-    2. Dictionary settings
+    1. Dictionary settings
     ![Dictionary settings](./assets/dict-settings.png "Dictionary settings")
-    3. Device settings
+    1. Device settings
     ![Device settings 1](./assets/device-settings-1.png "Device settings 1")
     ![Device settings 2](./assets/device-settings-2.png "Device settings 2")
     ![Device settings 3](./assets/device-settings-3.png "Device settings 3")

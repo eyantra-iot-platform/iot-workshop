@@ -96,19 +96,19 @@ def update_thing_state(client, userdata, message):
 	# Change to your LED device 
 	if 'device24.65' in state:
 		led = message_dict['state']['device24.65']
-		if led == 0:
+		if led == "RED":
 			GPIO.output(LED_PIN_1, True)
 			GPIO.output(LED_PIN_2, False)
 			GPIO.output(LED_PIN_3, False)
-		elif led == 1:
+		elif led == "GREEN":
 			GPIO.output(LED_PIN_1, False)
 			GPIO.output(LED_PIN_2, True)
 			GPIO.output(LED_PIN_3, False)
-		elif led == 2:
+		elif led == "BLUE":
 			GPIO.output(LED_PIN_1, False)
 			GPIO.output(LED_PIN_2, False)
 			GPIO.output(LED_PIN_3, True)
-		elif led == 3:
+		elif led == "OFF":
 			GPIO.output(LED_PIN_1, False)
 			GPIO.output(LED_PIN_2, False)
 			GPIO.output(LED_PIN_3, False)
@@ -131,13 +131,13 @@ def update_thing_state(client, userdata, message):
 
 def get_led_values():
 	if GPIO.input(LED_PIN_1):
-		led = 0
+		led = "RED"
 	elif GPIO.input(LED_PIN_2):
-		led = 1
+		led = "GREEN"
 	elif GPIO.input(LED_PIN_3):
-		led = 2
+		led = "BLUE"
 	else:
-		led = 3
+		led = "OFF"
 	return led 
 
 
