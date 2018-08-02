@@ -82,7 +82,7 @@ def get_init_mqtt_client():
 def publish_sensor_data(interval, mqtt_client, servo1, servo2):	
 	while True:
 		# Dictionaries and messages for publishing
-		humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+		humidity, temperature = Adafruit_DHT.read_retry(sensor, DHT_PIN)
 		# TODO: Change the dictionary keys to keys of the device shadow JSON 
 		publish_dict = {'state': {'reported': {LED_ID: get_led_values(), 
 			SERVO_PIN_1_ID: servo1.get_value(),
