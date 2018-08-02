@@ -134,14 +134,16 @@ def update_thing_state(client, userdata, message):
 	if SERVO_PIN_1_ID in state:
 		print "Moving servo ..."
 		angle = message_dict['state'][SERVO_PIN_1_ID]
-		servo1.set_value(angle)
+		if angle >=0 and angle <= 180: 
+			servo1.set_value(angle)
 
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
 	# Change it to your servo1
 	if SERVO_PIN_2_ID in state:
 		print "Moving servo ...."
 		angle2 = message_dict['state'][SERVO_PIN_2_ID]
-		servo2.set_value(angle2)
+		if angle >=0 and angle <= 180: 
+			servo2.set_value(angle2)
 	
 
 
