@@ -110,43 +110,43 @@ def update_thing_state(client, userdata, message):
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
 	# Change to your LED device 
 
-	if size(sys.argv[1:]):
+	if len(sys.argv[1:]):
     	if sys.argv[1] == "--relay":
 			if LED_ID in state:
 				led = message_dict['state'][LED_ID]
 				if led == "BLUE":
-					GPIO.output(LED_PIN_1, True)
+					GPIO.output(LED_PIN_1, False)
 					GPIO.output(LED_PIN_2, False)
 					GPIO.output(LED_PIN_3, False)
 				elif led == "GREEN":
-					GPIO.output(LED_PIN_1, False)
+					GPIO.output(LED_PIN_1, True)
 					GPIO.output(LED_PIN_2, True)
 					GPIO.output(LED_PIN_3, False)
 				elif led == "RED":
-					GPIO.output(LED_PIN_1, False)
+					GPIO.output(LED_PIN_1, True)
 					GPIO.output(LED_PIN_2, False)
 					GPIO.output(LED_PIN_3, True)
 				elif led == "OFF":
-					GPIO.output(LED_PIN_1, False)
+					GPIO.output(LED_PIN_1, True)
 					GPIO.output(LED_PIN_2, False)
 					GPIO.output(LED_PIN_3, False)
 	else: 
 		if LED_ID in state:
 			led = message_dict['state'][LED_ID]
 			if led == "BLUE":
-				GPIO.output(LED_PIN_1, False)
+    			GPIO.output(LED_PIN_1, True)
 				GPIO.output(LED_PIN_2, False)
 				GPIO.output(LED_PIN_3, False)
 			elif led == "GREEN":
-				GPIO.output(LED_PIN_1, True)
+				GPIO.output(LED_PIN_1, False)
 				GPIO.output(LED_PIN_2, True)
 				GPIO.output(LED_PIN_3, False)
 			elif led == "RED":
-				GPIO.output(LED_PIN_1, True)
+				GPIO.output(LED_PIN_1, False)
 				GPIO.output(LED_PIN_2, False)
 				GPIO.output(LED_PIN_3, True)
 			elif led == "OFF":
-				GPIO.output(LED_PIN_1, True)
+				GPIO.output(LED_PIN_1, False)
 				GPIO.output(LED_PIN_2, False)
 				GPIO.output(LED_PIN_3, False)
 
