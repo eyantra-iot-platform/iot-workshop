@@ -3,10 +3,10 @@ import time
 import json
 import ast
 import RPi.GPIO as GPIO
+import sys
 import servo_control as servo
 import Adafruit_DHT
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
-
 
 # Details about thing
 # TODO: Change settings
@@ -78,7 +78,6 @@ def get_init_mqtt_client():
 
 
 
-
 def publish_sensor_data(interval, mqtt_client, servo1, servo2):	
 	while True:
 		# Dictionaries and messages for publishing
@@ -110,24 +109,46 @@ def update_thing_state(client, userdata, message):
 	state = message_dict['state']
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
 	# Change to your LED device 
-	if LED_ID in state:
-		led = message_dict['state'][LED_ID]
-		if led == "BLUE":
-			GPIO.output(LED_PIN_1, True)
-			GPIO.output(LED_PIN_2, False)
-			GPIO.output(LED_PIN_3, False)
-		elif led == "GREEN":
-			GPIO.output(LED_PIN_1, False)
-			GPIO.output(LED_PIN_2, True)
-			GPIO.output(LED_PIN_3, False)
-		elif led == "RED":
-			GPIO.output(LED_PIN_1, False)
-			GPIO.output(LED_PIN_2, False)
-			GPIO.output(LED_PIN_3, True)
-		elif led == "OFF":
-			GPIO.output(LED_PIN_1, False)
-			GPIO.output(LED_PIN_2, False)
-			GPIO.output(LED_PIN_3, False)
+
+	if size(sys.argv[1:]):
+    	if sys.argv[1] == "--relay":
+			if LED_ID in state:
+				led = message_dict['state'][LED_ID]
+				if led == "BLUE":
+					GPIO.output(LED_PIN_1, True)
+					GPIO.output(LED_PIN_2, False)
+					GPIO.output(LED_PIN_3, False)
+				elif led == "GREEN":
+					GPIO.output(LED_PIN_1, False)
+					GPIO.output(LED_PIN_2, True)
+					GPIO.output(LED_PIN_3, False)
+				elif led == "RED":
+					GPIO.output(LED_PIN_1, False)
+					GPIO.output(LED_PIN_2, False)
+					GPIO.output(LED_PIN_3, True)
+				elif led == "OFF":
+					GPIO.output(LED_PIN_1, False)
+					GPIO.output(LED_PIN_2, False)
+					GPIO.output(LED_PIN_3, False)
+	else: 
+		if LED_ID in state:
+			led = message_dict['state'][LED_ID]
+			if led == "BLUE":
+				GPIO.output(LED_PIN_1, False)
+				GPIO.output(LED_PIN_2, False)
+				GPIO.output(LED_PIN_3, False)
+			elif led == "GREEN":
+				GPIO.output(LED_PIN_1, True)
+				GPIO.output(LED_PIN_2, True)
+				GPIO.output(LED_PIN_3, False)
+			elif led == "RED":
+				GPIO.output(LED_PIN_1, True)
+				GPIO.output(LED_PIN_2, False)
+				GPIO.output(LED_PIN_3, True)
+			elif led == "OFF":
+				GPIO.output(LED_PIN_1, True)
+				GPIO.output(LED_PIN_2, False)
+				GPIO.output(LED_PIN_3, False)
 
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
 	# Change it to your servo1
@@ -138,7 +159,7 @@ def update_thing_state(client, userdata, message):
 			servo1.set_value(angle)
 
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
-	# Change it to your servo1
+	# Change it to your servo 1
 	if SERVO_PIN_2_ID in state:
 		print "Moving servo ...."
 		angle2 = message_dict['state'][SERVO_PIN_2_ID]
