@@ -31,8 +31,8 @@ DHT_PIN = 21
 
 # Device ids
 LED_ID = "device81.241"
-SERVO_PIN_1_ID = "device78.238"
-SERVO_PIN_2_ID = "device79.239"
+SERVO_PIN_1_ID = "device78.238" # Horizontal servo
+SERVO_PIN_2_ID = "device79.239" # Vertical servo
 
 TEMP_ID = "device82.242"
 HUMID_ID = "device82.243"
@@ -142,7 +142,7 @@ def update_thing_state(client, userdata, message):
 	if SERVO_PIN_2_ID in state:
 		print "Moving servo ...."
 		angle2 = message_dict['state'][SERVO_PIN_2_ID]
-		if angle >=0 and angle <= 180: 
+		if angle2 >=0 and angle2 <= 180: 
 			servo2.set_value(angle2)
 	
 
