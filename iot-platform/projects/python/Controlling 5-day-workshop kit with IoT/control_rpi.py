@@ -27,7 +27,7 @@ SERVO_PIN_1 = 23
 SERVO_PIN_2 = 24
 
 # Temperature and humidity sensor
-DHT_PIN = 39
+DHT_PIN = 21
 
 # Device ids
 LED_ID = "device81.241"
