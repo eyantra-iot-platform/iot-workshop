@@ -10,10 +10,10 @@ from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
 # Details about thing
 # TODO: Change settings
-THING_ID = "thing22"
-CLIENT_ID = "MyRpi"
+THING_ID = "thing50"
+CLIENT_ID = "MyRpi50"
 CERTIFICATE_PATH = "./certificates"
-ENDPOINT = "akbmorjah98q5.iot.ap-southeast-1.amazonaws.com"
+ENDPOINT = "a221a6r4ojicsi.iot.ap-southeast-1.amazonaws.com"
 
 # LED PINs
 # TODO: Change pins [if required]
@@ -23,19 +23,19 @@ LED_PIN_3 = 22 # 15 B but R
 
 # Servo PINs
 # TODO: Change settings [if required]
-SERVO_PIN_1 = 23
-SERVO_PIN_2 = 24
+SERVO_PIN_1 = 23 # 16
+SERVO_PIN_2 = 24 # 18
 
 # Temperature and humidity sensor
 DHT_PIN = 21
 
 # Device ids
-LED_ID = "device81.241"
-SERVO_PIN_1_ID = "device78.238" # Horizontal servo
-SERVO_PIN_2_ID = "device79.239" # Vertical servo
+LED_ID = "device88.254"
+SERVO_PIN_1_ID = "device86.249" # Horizontal servo
+SERVO_PIN_2_ID = "device86.250" # Vertical servo
 
-TEMP_ID = "device82.242"
-HUMID_ID = "device82.243"
+TEMP_ID = "device85.247"
+HUMID_ID = "device85.248"
 
 
 # Initialize GPIO
@@ -84,10 +84,10 @@ def publish_sensor_data(interval, mqtt_client, servo1, servo2):
 		humidity, temperature = Adafruit_DHT.read_retry(sensor, DHT_PIN)
 		# TODO: Change the dictionary keys to keys of the device shadow JSON 
 		publish_dict = {'state': {'reported': {LED_ID: get_led_values(), 
-			SERVO_PIN_1_ID: servo1.get_value(),
-			SERVO_PIN_2_ID: servo2.get_value(),
-			TEMP_ID: temperature,
-			HUMID_ID: humidity
+		SERVO_PIN_1_ID: servo1.get_value(),
+		SERVO_PIN_2_ID: servo2.get_value(),
+		TEMP_ID: temperature,
+		HUMID_ID: humidity
 		}}}
 
 		publish_message = json.dumps(publish_dict)
@@ -105,13 +105,13 @@ def publish_sensor_data(interval, mqtt_client, servo1, servo2):
 def update_thing_state(client, userdata, message):
 	print client, userdata, message
 	message_dict = ast.literal_eval(message.payload)
-	
+
 	state = message_dict['state']
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
 	# Change to your LED device 
 
 	if len(sys.argv[1:]):
-    	if sys.argv[1] == "--relay":
+		if sys.argv[1] == "--relay":
 			if LED_ID in state:
 				led = message_dict['state'][LED_ID]
 				if led == "BLUE":
@@ -130,31 +130,32 @@ def update_thing_state(client, userdata, message):
 					GPIO.output(LED_PIN_1, True)
 					GPIO.output(LED_PIN_2, False)
 					GPIO.output(LED_PIN_3, False)
-	else: 
-		if LED_ID in state:
-			led = message_dict['state'][LED_ID]
-			if led == "BLUE":
-    			GPIO.output(LED_PIN_1, True)
-				GPIO.output(LED_PIN_2, False)
-				GPIO.output(LED_PIN_3, False)
-			elif led == "GREEN":
-				GPIO.output(LED_PIN_1, False)
-				GPIO.output(LED_PIN_2, True)
-				GPIO.output(LED_PIN_3, False)
-			elif led == "RED":
-				GPIO.output(LED_PIN_1, False)
-				GPIO.output(LED_PIN_2, False)
-				GPIO.output(LED_PIN_3, True)
-			elif led == "OFF":
-				GPIO.output(LED_PIN_1, False)
-				GPIO.output(LED_PIN_2, False)
-				GPIO.output(LED_PIN_3, False)
+		else: 
+			if LED_ID in state:
+				led = message_dict['state'][LED_ID]
+				if led == "BLUE":
+					GPIO.output(LED_PIN_1, True)
+					GPIO.output(LED_PIN_2, False)
+					GPIO.output(LED_PIN_3, False)
+				elif led == "GREEN":
+					GPIO.output(LED_PIN_1, False)
+					GPIO.output(LED_PIN_2, True)
+					GPIO.output(LED_PIN_3, False)
+				elif led == "RED":
+					GPIO.output(LED_PIN_1, False)
+					GPIO.output(LED_PIN_2, False)
+					GPIO.output(LED_PIN_3, True)
+				elif led == "OFF":
+					GPIO.output(LED_PIN_1, False)
+					GPIO.output(LED_PIN_2, False)
+					GPIO.output(LED_PIN_3, False)
 
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
 	# Change it to your servo1
 	if SERVO_PIN_1_ID in state:
 		print "Moving servo ..."
 		angle = message_dict['state'][SERVO_PIN_1_ID]
+		
 		if angle >=0 and angle <= 180: 
 			servo1.set_value(angle)
 
@@ -163,9 +164,11 @@ def update_thing_state(client, userdata, message):
 	if SERVO_PIN_2_ID in state:
 		print "Moving servo ...."
 		angle2 = message_dict['state'][SERVO_PIN_2_ID]
+		
 		if angle2 >=0 and angle2 <= 180: 
 			servo2.set_value(angle2)
-	
+
+
 
 
 def get_led_values():
@@ -177,7 +180,7 @@ def get_led_values():
 		led = "RED"
 	else:
 		led = "OFF"
-	return led 
+		return led 
 
 
 
