@@ -107,13 +107,16 @@ def update_thing_state(client, userdata, message):
 	message_dict = ast.literal_eval(message.payload)
 
 	state = message_dict['state']
+	print state
+
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
 	# Change to your LED device 
-
+	print "len of arguments ", len(sys.argv[1:])
 	if len(sys.argv[1:]):
 		if sys.argv[1] == "--relay":
 			if LED_ID in state:
 				led = message_dict['state'][LED_ID]
+				print led
 				if led == "BLUE":
 					GPIO.output(LED_PIN_1, False)
 					GPIO.output(LED_PIN_2, False)
@@ -130,25 +133,26 @@ def update_thing_state(client, userdata, message):
 					GPIO.output(LED_PIN_1, True)
 					GPIO.output(LED_PIN_2, False)
 					GPIO.output(LED_PIN_3, False)
-		else: 
-			if LED_ID in state:
-				led = message_dict['state'][LED_ID]
-				if led == "BLUE":
-					GPIO.output(LED_PIN_1, True)
-					GPIO.output(LED_PIN_2, False)
-					GPIO.output(LED_PIN_3, False)
-				elif led == "GREEN":
-					GPIO.output(LED_PIN_1, False)
-					GPIO.output(LED_PIN_2, True)
-					GPIO.output(LED_PIN_3, False)
-				elif led == "RED":
-					GPIO.output(LED_PIN_1, False)
-					GPIO.output(LED_PIN_2, False)
-					GPIO.output(LED_PIN_3, True)
-				elif led == "OFF":
-					GPIO.output(LED_PIN_1, False)
-					GPIO.output(LED_PIN_2, False)
-					GPIO.output(LED_PIN_3, False)
+	else: # if no cmd line arguments then run default LED loop
+		if LED_ID in state:
+			led = message_dict['state'][LED_ID]
+			print led
+			if led == "BLUE":
+				GPIO.output(LED_PIN_1, True)
+				GPIO.output(LED_PIN_2, False)
+				GPIO.output(LED_PIN_3, False)
+			elif led == "GREEN":
+				GPIO.output(LED_PIN_1, False)
+				GPIO.output(LED_PIN_2, True)
+				GPIO.output(LED_PIN_3, False)
+			elif led == "RED":
+				GPIO.output(LED_PIN_1, False)
+				GPIO.output(LED_PIN_2, False)
+				GPIO.output(LED_PIN_3, True)
+			elif led == "OFF":
+				GPIO.output(LED_PIN_1, False)
+				GPIO.output(LED_PIN_2, False)
+				GPIO.output(LED_PIN_3, False)
 
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
 	# Change it to your servo1
@@ -180,7 +184,7 @@ def get_led_values():
 		led = "RED"
 	else:
 		led = "OFF"
-		return led 
+	return led 
 
 
 
