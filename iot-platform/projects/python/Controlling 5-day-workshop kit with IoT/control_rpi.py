@@ -176,14 +176,25 @@ def update_thing_state(client, userdata, message):
 
 
 def get_led_values():
-	if GPIO.input(LED_PIN_1):
-		led = "BLUE"
-	elif GPIO.input(LED_PIN_2):
-		led = "GREEN"
-	elif GPIO.input(LED_PIN_3):
-		led = "RED"
+	if len(sys.argv[1:]):
+		if sys.argv[1] == "--relay": 
+			if GPIO.input(LED_PIN_1) == False:
+				led = "BLUE"
+			elif GPIO.input(LED_PIN_2):
+				led = "GREEN"
+			elif GPIO.input(LED_PIN_3):
+				led = "RED"
+			else:
+				led = "OFF"
 	else:
-		led = "OFF"
+		if GPIO.input(LED_PIN_1):
+			led = "BLUE"
+		elif GPIO.input(LED_PIN_2):
+			led = "GREEN"
+		elif GPIO.input(LED_PIN_3):
+			led = "RED"
+		else:
+			led = "OFF"
 	return led 
 
 
