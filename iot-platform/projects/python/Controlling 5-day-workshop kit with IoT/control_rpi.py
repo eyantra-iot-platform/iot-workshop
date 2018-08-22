@@ -59,7 +59,6 @@ servo2 = servo.Servo(SERVO_PIN_2)
 sensor = Adafruit_DHT.DHT11
 
 
-
 def get_init_mqtt_client(): 
 	# Configuration for AWS IoT
 	myMQTTClient = AWSIoTMQTTClient(CLIENT_ID)
@@ -78,27 +77,30 @@ def get_init_mqtt_client():
 
 
 
-def publish_sensor_data(interval, mqtt_client, servo1, servo2):	
+def publish_continuously(interval, mqtt_client, servo1, servo2):
 	while True:
-		# Dictionaries and messages for publishing
-		humidity, temperature = Adafruit_DHT.read_retry(sensor, DHT_PIN)
-		# TODO: Change the dictionary keys to keys of the device shadow JSON 
-		publish_dict = {'state': {'reported': {LED_ID: get_led_values(), 
-		SERVO_PIN_1_ID: servo1.get_value(),
-		SERVO_PIN_2_ID: servo2.get_value(),
-		TEMP_ID: temperature,
-		HUMID_ID: humidity
-		}}}
-
-		publish_message = json.dumps(publish_dict)
-		print "Message to publish:-", publish_message
-
-		# Update device shadow
-		published = mqtt_client.publish(UPDATE_TOPIC, publish_message, 0)
-		print "Published:-", published
-
-		# wait interval seconds before executing again
+		publish_sensor_data(mqtt_client, servo1, servo2)
 		time.sleep(interval)
+
+
+
+def publish_sensor_data(mqtt_client, servo1, servo2):	
+	# Dictionaries and messages for publishing
+	humidity, temperature = Adafruit_DHT.read_retry(sensor, DHT_PIN)
+	# TODO: Change the dictionary keys to keys of the device shadow JSON 
+	publish_dict = {'state': {'reported': {LED_ID: get_led_values(), 
+	SERVO_PIN_1_ID: servo1.get_value(),
+	SERVO_PIN_2_ID: servo2.get_value(),
+	TEMP_ID: temperature,
+	HUMID_ID: humidity
+	}}}
+
+	publish_message = json.dumps(publish_dict)
+	print "Message to publish:-", publish_message
+
+	# Update device shadow
+	published = mqtt_client.publish(UPDATE_TOPIC, publish_message, 0)
+	print "Published:-", published
 
 
 
@@ -153,7 +155,6 @@ def update_thing_state(client, userdata, message):
 				GPIO.output(LED_PIN_1, False)
 				GPIO.output(LED_PIN_2, False)
 				GPIO.output(LED_PIN_3, False)
-
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
 	# Change it to your servo1
 	if SERVO_PIN_1_ID in state:
@@ -162,7 +163,6 @@ def update_thing_state(client, userdata, message):
 		
 		if angle >=0 and angle <= 180: 
 			servo1.set_value(angle)
-
 	# TODO: Change the dictionary keys to keys of the device shadow JSON
 	# Change it to your servo 1
 	if SERVO_PIN_2_ID in state:
@@ -171,7 +171,8 @@ def update_thing_state(client, userdata, message):
 		
 		if angle2 >=0 and angle2 <= 180: 
 			servo2.set_value(angle2)
-
+	# push updated state
+	# publish_sensor_data(mqtt_client, servo1, servo2)
 
 
 
@@ -203,10 +204,11 @@ if __name__ == "__main__":
 	try:
 		# Connect to MQTT broker
 		mqtt_client = get_init_mqtt_client()
+
 		print "Connected:-", mqtt_client.connect()
 		
 		# Start the thread
-		t = threading.Thread(target=publish_sensor_data, args = (5, mqtt_client, 
+		t = threading.Thread(target=publish_continuously, args = (5, mqtt_client, 
 			servo1, servo2))
 		
 
