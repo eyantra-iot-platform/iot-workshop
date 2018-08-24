@@ -56,7 +56,7 @@ while True:
     
     # change values
     TEMP = (TEMP + 1) % 16 + 25 # temperature between 25 to 40
-    HUMD = (humd + 1) % 31 + 40 # humidity between 31 to 40 
+    HUMD = (HUMD + 1) % 31 + 40 # humidity between 31 to 40 
 
     print("Published: ", published)
     time.sleep(5)
