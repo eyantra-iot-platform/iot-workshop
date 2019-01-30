@@ -1,0 +1,25 @@
+{
+  "device": {
+    "id": "???"
+  },
+  "wifi": {
+    "sta": {
+      "enable": true,
+      "ssid": "???",
+      "pass": "???"
+    },
+    "ap": {
+      "enable": false
+    }
+  },
+  "mqtt": {
+    "enable": true,
+    "server": "a221a6r4ojicsi.iot.ap-southeast-1.amazonaws.com:8883",
+    "ssl_cert": "certificate.crt.pem",
+    "ssl_key": "private.key.pem",
+    "ssl_ca_cert": "ca.pem"
+  },
+  "aws": {
+    "thing_name": "thing???"
+  }
+}
