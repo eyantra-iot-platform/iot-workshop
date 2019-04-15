@@ -3,7 +3,7 @@ This wiki contains the instruction and links for using Mongoose OS with ESP8266.
 First of all Clone or download the github [repo](https://github.com/sanamshakya/interfacing-AWS-IoT) before going through further instructions. All the required codes for workshop are available in the above repo.
 
 # Mongoose OS
-An open source operating system for hardware that support javascript. It follows event-driven architecture of javascript with a non-blocking I/O model.
+An open source operating system for hardware that support javascript. It follows event-driven architecture with a non-blocking I/O model.
 
 ## Features
 * Supported microcontrollers: ESP32, ESP8266, CC3220, CC3200
@@ -14,20 +14,20 @@ An open source operating system for hardware that support javascript. It follows
 * Write firmware in Javascript or in C
 * Supports Over the Air(OTA) firmware update
 
-For further information on Mongoose OS is available in following [link](https://mongoose-os.com/)
+For further information on Mongoose OS is available on the following [link](https://mongoose-os.com/)
 
 # Mongoose OS components
-* mos tool - device management and firmware building
-* build toolchain - Docker image for building a mongoose OS app (normally happens in cloud unless specified otherwise)
-* ready-to-use apps and libraries
+* **mos tool** - device management and firmware building
+* **build toolchain (only for building firmware offline)** - Docker image for building a mongoose OS app (normally happens in cloud unless specified otherwise)
+* **ready-to-use apps and libraries**
 
 # Hardware and Softwares
-* Hardware required: ESP8266
+* Hardware required: ESP8266 or ESP32
 * Software required: mos tool
 
 # Installing mos tool
 Follow instruction in given link to install mos tool
- https://mongoose-os.com/software.html
+https://mongoose-os.com/docs/mongoose-os/quickstart/setup.md#1-download-and-install-mos-tool
 
 # Running the demo-js app
 
