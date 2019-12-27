@@ -14,7 +14,7 @@ This is a project to send arbitrary data to AWS IoT. It publishes data to thing 
  5. View the thing properties by clicking GENERATE CLIENT button in dashboard. 
 [[./assets/Thing_properties.png]]
 Note the clientID and deviceXX.XX in the pop-up. In later instruction these will be needed in the code.
- 6. In explorer, go to *interfacing-AWS-IoT/RPi/test-js/* folder.
+ 6. In explorer, go to *interfacing-AWS-IoT/RPi/test-js/* folder. See [this](https://github.com/sanamshakya/interfacing-AWS-IoT/blob/master/RPi/test-js/)
  7. Run command "npm init" and fill the fields you require (optionally, you can also skip through all of them).
  8. Run command "npm install aws-iot-device-sdk --save".
  7. Copy downloaded files: certificate.crt.pem, private.key.pem, public.key.pem and rootCA.pem in test-js folder
