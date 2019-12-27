@@ -9,10 +9,10 @@ This is a project to send arbitrary data to AWS IoT. It publishes data to thing 
  3. Create devices under thing as:
      * Temperature, double
      * Humidity, double
-[[/img/adding_device.png|adding devices]]
+[[./assets/adding_device.png|adding devices]]
  4. Download certificates and keep them in a separate folder
  5. View the thing properties by clicking GENERATE CLIENT button in dashboard. 
-[[/img/Thing_properties.png]]
+[[./assets/Thing_properties.png]]
 Note the clientID and deviceXX.XX in the pop-up. In later instruction these will be needed in the code.
  6. In explorer, go to *interfacing-AWS-IoT/RPi/test-js/* folder.
  7. Run command "npm init" and fill the fields you require (optionally, you can also skip through all of them).
@@ -22,7 +22,3 @@ Note the clientID and deviceXX.XX in the pop-up. In later instruction these will
  9. For now we will supply arbitrary values to iot platform. For it, we will replace fields enclosed in "< >" by integers or doubles ( e.g. <device-attribute> becomes 19 and so on).
  10. In terminal go to test-js folder and run command "node test.js" to start the app.
  11. Go to dashboard, check if values are updated. 
-
-
-
-
