@@ -1,4 +1,4 @@
-# iot-workshop
+# iot-workshop 2018
 This repository contains resources for e-Yantra IoT Workshops. The workshops teach IoT and how to use IoT Platform to 
 build IoT Applications. 
 
